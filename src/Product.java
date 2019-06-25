@@ -3,8 +3,19 @@ import jade.util.leap.Serializable;
 public class Product implements Serializable{
 	
 	double price;
+	double reservePrice;
 	String nameProduct;
-	
+
+
+	public double getReservePrice() {
+		return reservePrice;
+	}
+
+	public void setReservePrice(double reservePrice) {
+		this.reservePrice = reservePrice;
+	}
+
+		
 	public String getNameProduct() {
 		return nameProduct;
 	}
