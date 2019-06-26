@@ -5,6 +5,7 @@ import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
+import jade.wrapper.StaleProxyException;
 
 public class MainContainer {
 
@@ -31,28 +32,28 @@ public class MainContainer {
 		System.out.println("\nEnter the reserved price :");
 		product.setReservePrice(sc.nextFloat());
 		
-		argSeller[1] = product;
+		
 		
 		//=======================================================================================
-		
+		Scanner sc1 = new Scanner(System.in);
 		Bidding bidding = new Bidding();
 		String nameBuyer;
 		Object[] argBuyer = new Object[2];
 		
 		//================================= CREATE AGENTS BUYER =================================
 		System.out.println("\nEnter the name of the agent Buyer :");
-		nameBuyer = sc.nextLine();
+		nameBuyer = sc1.nextLine();
 		
 		System.out.println("\nEnter the raise :");
-		bidding.setRaise(sc.nextFloat());
+		bidding.setRaise(sc1.nextFloat());
 		
 		System.out.println("\nEnter the max price :");
-		bidding.setMaxPrice(sc.nextFloat());
+		bidding.setMaxPrice(sc1.nextFloat());
 		
 		argBuyer[0] = nameBuyer;
 		
 		//=======================================================================================
-		
+		argBuyer[1] = product;
 		rt.setCloseVM(true);
 			ProfileImpl p = new ProfileImpl("localhost",1099,null);
 			ContainerController mc = rt.createMainContainer(p);
@@ -62,11 +63,14 @@ public class MainContainer {
 			liste.get(liste.size()-1).start();
 			*/
 		
-			AgentController ag1 = mc.createNewAgent(nameSeller, "Seller",argBuyer);
-			ag1.start();
-			AgentController ag2 = mc.createNewAgent(nameBuyer, "Buyer",argBuyer);
-			ag2.start();
-		}catch (Exception e) {e.printStackTrace();}
+			AgentController seller = mc.createNewAgent(nameSeller, "Seller",argBuyer);
+			seller.start();
+			AgentController buyer = mc.createNewAgent(nameBuyer, "Buyer",argBuyer);
+			buyer.start();
+		} catch (StaleProxyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 }

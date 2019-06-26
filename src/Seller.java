@@ -16,8 +16,9 @@ public class Seller extends Agent {
 		try {
 			Object[] args = getArguments();
 			Product product = (Product)args[1];
+			String nameBuyer = (String)args[0];
 			
-			msg.addReceiver(new AID(msg.getSender().getLocalName(),AID.ISLOCALNAME));
+			msg.addReceiver(new AID(nameBuyer,AID.ISLOCALNAME));
 			msg.setContentObject(product);
 			msg.setLanguage("JavaSerialization");
 			send(msg);
@@ -29,7 +30,7 @@ public class Seller extends Agent {
 				ACLMessage Buymsg = new ACLMessage(ACLMessage.INFORM);
 				Buymsg = receive();
 				if(Buymsg != null) {
-					System.out.println("I am : "+getLocalName()+" I received the message " + Buymsg.getContent() + " From "
+					System.out.println("I am : "+getLocalName()+" I received the message " + Buymsg.getContent() + " from the agent "
 				                                    + Buymsg.getSender().getLocalName());
 					doDelete();
 					Runtime.getRuntime().exit(Seller.AP_DELETED);
