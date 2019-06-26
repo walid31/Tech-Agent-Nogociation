@@ -62,7 +62,7 @@ public class MainContainer {
 			liste.get(liste.size()-1).start();
 			*/
 		
-			AgentController ag1 = mc.createNewAgent(nameSeller, "Seller",argSeller);
+			AgentController ag1 = mc.createNewAgent(nameSeller, "Seller",argBuyer);
 			ag1.start();
 			AgentController ag2 = mc.createNewAgent(nameBuyer, "Buyer",argBuyer);
 			ag2.start();
