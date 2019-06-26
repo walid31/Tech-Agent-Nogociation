@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import jade.core.AID;
@@ -15,16 +16,18 @@ public class Seller extends Agent {
 		
 		try {
 			Object[] args = getArguments();
-			Product product = (Product)args[1];
+			Product product = (Product)args[0];
+			ArrayList<String> listBuyers = (ArrayList<String>) args[1];
 			
-			msg.addReceiver(new AID(msg.getSender().getLocalName(),AID.ISLOCALNAME));
-			msg.setContentObject(product);
-			msg.setLanguage("JavaSerialization");
-			send(msg);
-			System.out.println("test sur develop");
+			for (int i = 0 ; i < listBuyers.size() ; i++) {
+				msg.addReceiver(new AID(listBuyers.get(i),AID.ISLOCALNAME));
+				msg.setContentObject(product);
+				msg.setLanguage("JavaSerialization");
+				send(msg);
+			}
 		}catch (IOException e) {e.printStackTrace(); }
 		doDelete();
-		
+	
 		addBehaviour(new CyclicBehaviour(this) {
 			public void action() {
 				ACLMessage Buymsg = new ACLMessage(ACLMessage.INFORM);

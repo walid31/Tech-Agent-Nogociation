@@ -1,10 +1,10 @@
 
 public class Bidding {
 
-	float raise;
-	float maxPrice;
+	String raise;
+	String maxPrice;
 	
-	public Bidding(float raise, float maxPrice) {
+	public Bidding(String raise, String maxPrice) {
 		super();
 		this.raise = raise;
 		this.maxPrice = maxPrice;
@@ -14,19 +14,19 @@ public class Bidding {
 		super();
 	}
 
-	public float getRaise() {
+	public String getRaise() {
 		return raise;
 	}
 
-	public void setRaise(float raise) {
+	public void setRaise(String raise) {
 		this.raise = raise;
 	}
 
-	public float getMaxPrice() {
+	public String getMaxPrice() {
 		return maxPrice;
 	}
 
-	public void setMaxPrice(float maxPrice) {
+	public void setMaxPrice(String maxPrice) {
 		this.maxPrice = maxPrice;
 	}
 	
