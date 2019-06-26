@@ -21,6 +21,7 @@ public class Seller extends Agent {
 			msg.setContentObject(product);
 			msg.setLanguage("JavaSerialization");
 			send(msg);
+			System.out.println("test sur develop");
 		}catch (IOException e) {e.printStackTrace(); }
 		doDelete();
 		
